@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fgnass/deep-match.svg?branch=master)](https://travis-ci.org/fgnass/deep-match)
+
 # Check if two values deeply match
 
 `deepMatch(object, example)`
