@@ -34,6 +34,31 @@ deepMatch([1, 2, 3], [v => v === 1]); // true
 
 ```
 
+When matching arrays order of items do not matters by default. To change it you can use additional parameter:
+
+```js
+let opts = { arrayOrderMatters: true };
+deepMatch([1, 2], [1, 2], opts); // true
+deepMatch([1, 2], [2, 1], opts); // false
+deepMatch([1, 2], [   2], opts); // false
+
+// disable checks for undefined items
+// [,2] is the same as [undefined, 2]
+deepMatch([1, 2], [ , 2], opts); // true
+
+// arrayOrderMatters applies also to nested arrays:
+source  = { a1: [ {i1: []}, {i2: [1, 2, [31, 32, 33], 4, 5]} ]};
+matcher = { a1: [ {i1: []}, {i2: [1,  , [32, 33    ],  , 5]} ]};
+deepMatch(source, matcher, opts); // false
+deepMatch(source, matcher);       // true
+
+source  = { a1: [ {i1: []}, {i2: [1, 2, [31, 32, 33], 4, 5]} ]};
+matcher = { a1: [ {i1: []}, {i2: [1,  , [31,   , 33],  , 5]} ]};
+deepMatch(source, matcher, opts); // true
+deepMatch(source, matcher);       // true
+
+```
+
 ## Rules
 
 Values are compared according to the following rules:
