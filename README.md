@@ -67,7 +67,7 @@ Values are compared according to the following rules:
 * Values of different types never match.
 * Values that are no objects only match if they are identical (see above).
 * Null values (which are also objects) only match if both are null.
-* Arrays match if all items in the example match.
+* Arrays match if all items in the example match (note different behavior for option `arrayOrderMatters`).
 * Objects match if all properties in the example match.
 
 # License
