@@ -23,7 +23,9 @@ module.exports = function deepMatch(obj, example, opts) {
   if (example instanceof Array) {
     if (arrayOrderMatters) {
       // Array should be compared in strict order
-      for (var [index, exampleItem] of example.entries()) {
+      for (var exampleEntry of example.entries()) {
+        var index = exampleEntry[0];
+        var exampleItem = exampleEntry[1];
         var objItem = obj[index];
         // this lets you skip validation for particular array items eg: [ , ,'validate']
         if (exampleItem === undefined) {
