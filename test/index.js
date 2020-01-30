@@ -104,8 +104,8 @@ describe('deep-match arrayOrderMatters', () => {
   // default behavior should be the same as using { arrayOrderMatters: false }
 
   it('should match basic array', () => {
-    let source = [1, 2];
-    let matcher = [1, 2];
+    var source = [1, 2];
+    var matcher = [1, 2];
     expect(match(source, matcher, { arrayOrderMatters: true }), 'to be true');
     expect(match(source, matcher, { arrayOrderMatters: false }), 'to be true');
     expect(match(source, matcher), 'to be true');
@@ -118,8 +118,8 @@ describe('deep-match arrayOrderMatters', () => {
   });
 
   it('should skip matching undefined items', () => {
-    let source = [];
-    let matcher = [];
+    var source = [];
+    var matcher = [];
     expect(match(source, matcher, { arrayOrderMatters: true }), 'to be true');
     expect(match(source, matcher, { arrayOrderMatters: false }), 'to be true');
     expect(match(source, matcher), 'to be true');
@@ -138,8 +138,8 @@ describe('deep-match arrayOrderMatters', () => {
   });
 
   it('should match nested arrays', () => {
-    let source = { v1: 'val', a1: [{ i1: [] }, { i2: [1, 2, [31, 32, 33], 4, 5] }] };
-    let matcher = { v1: 'val', a1: [{ i2: [1] }] };
+    var source = { v1: 'val', a1: [{ i1: [] }, { i2: [1, 2, [31, 32, 33], 4, 5] }] };
+    var matcher = { v1: 'val', a1: [{ i2: [1] }] };
     expect(match(source, matcher, { arrayOrderMatters: true }), 'to be false');
     expect(match(source, matcher, { arrayOrderMatters: false }), 'to be true');
     expect(match(source, matcher), 'to be true');
