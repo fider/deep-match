@@ -47,15 +47,16 @@ deepMatch([1, 2], [   2], opts); // false
 deepMatch([1, 2], [ , 2], opts); // true
 
 // arrayOrderMatters applies also to nested arrays:
-source  = { a1: [ {i1: []}, {i2: [1, 2, [31, 32, 33], 4, 5]} ]};
-matcher = { a1: [ {i1: []}, {i2: [1,  , [32, 33    ],  , 5]} ]};
+source  = { a1: [ {i1: []}, {i2: [1, 2,         [31, 32, 33], 4, 5]} ]};
+matcher = { a1: [ {i1: []}, {i2: [1, undefined, [32, 33    ],  , 5]} ]};
 deepMatch(source, matcher, opts); // false
-deepMatch(source, matcher);       // true
+deepMatch(source, matcher);       // false
 
-source  = { a1: [ {i1: []}, {i2: [1, 2, [31, 32, 33], 4, 5]} ]};
-matcher = { a1: [ {i1: []}, {i2: [1,  , [31,   , 33],  , 5]} ]};
+// Note that in case of arrayOrderMatters=false undefined is not skipped
+source  = { a1: [ {i1: []}, {i2: [1, 2,         [31, 32,        33], 4, 5]} ]};
+matcher = { a1: [ {i1: []}, {i2: [1, undefined, [31, undefined, 33],  , 5]} ]};
 deepMatch(source, matcher, opts); // true
-deepMatch(source, matcher);       // true
+deepMatch(source, matcher);       // false
 
 ```
 
@@ -68,6 +69,8 @@ Values are compared according to the following rules:
 * Values that are no objects only match if they are identical (see above).
 * Null values (which are also objects) only match if both are null.
 * Arrays match if all items in the example match (note different behavior for option `arrayOrderMatters`).
+* When `arrayOrderMatters=true` value of `undefined` matchers are skipped.
+* When `arrayOrderMatters=false` (default behavior) value of `undefined` matchers are NOT skipped.
 * Objects match if all properties in the example match.
 
 # License

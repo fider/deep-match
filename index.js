@@ -21,25 +21,22 @@ module.exports = function deepMatch(obj, example, opts = {}) {
 
   // Arrays match if all items in the example match.
   if (example instanceof Array) {
-
     if (arrayOrderMatters) {
-
       // Array should be compared in strict order
       for (let [index, exampleItem] of example.entries()) {
         let objItem = obj[index];
+        // this lets you skip validation for particular array items eg: [ , ,'validate']
         if (exampleItem === undefined) {
-          // this lets you skip validation for particular array items eg: [ , ,'validate']
           continue;
         }
-        if ( ! deepMatch(objItem, exampleItem, opts)) {
+        if (!deepMatch(objItem, exampleItem, opts)) {
           return false;
         }
       }
       return true;
     }
-    else {
 
-      // Array order does not matter
+    if (!arrayOrderMatters) {
       return example.every(function (item) {
         return obj instanceof Array && obj.some(function (o) {
           return deepMatch(o, item, opts);
