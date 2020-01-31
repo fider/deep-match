@@ -1,6 +1,6 @@
 {
   "name": "deep-match2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Check if two values deeply match (optionally with arrayOrderMatters)",
   "author": "Wojciech Fiderek",
   "license": "MIT",
