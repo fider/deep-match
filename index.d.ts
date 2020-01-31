@@ -1,4 +1,4 @@
-declare module 'deep-match' {
+declare module 'deep-match2' {
     export type DeepMatchOpts = {
         arrayOrderMatters?: boolean;
     }
