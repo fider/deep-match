@@ -1,5 +1,5 @@
-const match = require('..');
 const expect = require('unexpected');
+const match = require('..');
 
 describe('deep-match', () => {
   it('should match primitives', () => {

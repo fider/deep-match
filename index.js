@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function deepMatch(obj, example, opts) {
   var arrayOrderMatters = (opts && opts.arrayOrderMatters) || false;
 
@@ -23,15 +25,14 @@ module.exports = function deepMatch(obj, example, opts) {
   if (example instanceof Array) {
     if (arrayOrderMatters) {
       // Array should be compared in strict order
-      for (var i = 0; i < example.length; i++) {
+      for (var i = 0; i < example.length; i += 1) {
         var exampleItem = example[i];
         var objItem = obj[i];
         // this lets you skip validation for particular array items eg: [ , ,'validate']
-        if (exampleItem === undefined) {
-          continue;
-        }
-        if (!deepMatch(objItem, exampleItem, opts)) {
-          return false;
+        if (exampleItem !== undefined) {
+          if (!deepMatch(objItem, exampleItem, opts)) {
+            return false;
+          }
         }
       }
       return true;

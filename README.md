@@ -1,11 +1,16 @@
-[![Build Status](https://travis-ci.org/fgnass/deep-match.svg?branch=master)](https://travis-ci.org/fgnass/deep-match)
+[![Build Status](https://travis-ci.org/fider/deep-match.svg?branch=master)](https://travis-ci.org/fider/deep-match)
 
 # Check if two values deeply match
 
-`deepMatch(object, example)`
+`deepMatch(object, matcher)`
 
-All properties and nested objects mentioned in the `example` are required to be
+All properties and nested objects mentioned in the `matcher` are required to be
 present in `object`.
+
+Library is version of [deep-match](https://www.npmjs.com/package/deep-match).
+Difference:
+- in [deep-match](https://www.npmjs.com/package/deep-match) during comparison of arrays order of items do not matters
+- in deep-match2 you can set `options = { arrayOrderMatters: true }` to force that during comparison order of items in `object` and `matcher` should be the same.
 
 ```js
 // two objects that look exactly the same
@@ -22,7 +27,7 @@ deepMatch([1, 2, 3], [1, 2]); // true
 deepMatch([1, 2, 3], [3, 4]); // false
 ```
 
-Regular expressions and functions in the `example` are run against the corresponding values in the `object`:
+Regular expressions and functions in the `matcher` are run against the corresponding values in the `object`:
 
 ```js
 deepMatch('aaa', /a+/); // true
@@ -68,10 +73,10 @@ Values are compared according to the following rules:
 * Values of different types never match.
 * Values that are no objects only match if they are identical (see above).
 * Null values (which are also objects) only match if both are null.
-* Arrays match if all items in the example match (note different behavior for option `arrayOrderMatters`).
+* Arrays match if all items in the `matcher` match (note different behavior for option `arrayOrderMatters`).
 * When `arrayOrderMatters=true` value of `undefined` matchers are skipped.
 * When `arrayOrderMatters=false` (default behavior) value of `undefined` matchers are NOT skipped.
-* Objects match if all properties in the example match.
+* Objects match if all properties in the `matcher` match.
 
 # License
 
